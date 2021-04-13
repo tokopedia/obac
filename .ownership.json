@@ -1,0 +1,17 @@
+{
+  "repository_name": "obac",
+  "description": "central repository for observability as code",
+  "security_owner": "zainul.masadi@tokopedia.com",
+  "directorate": "TECH",
+  "namespace": "obac",
+  "app": [
+    {
+      "name": "obac",
+      "description": "central repository for observability as code",
+      "owner": "zainul.masadi@tokopedia.com",
+      "slack_channel": "wg-observability-as-code",
+      "db": [""]
+    }
+  ],
+  "last_update": "13/04/2020"
+}
