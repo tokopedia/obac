@@ -17,7 +17,7 @@ inputs = {
     dependency.policy.outputs.id,
   ]
   nrql_alert_condition_enabled = true
-  nrql_alert_condition_query = "SELECT percentile(timer, 95) AS Latency FROM promo_function_stacking_validate_time WHERE type='api'"
+  nrql_alert_condition_query = "SELECT percentile(timer, 95) AS Latency FROM metric-name WHERE type='api'"
 
   nrql_alert_condition_critical = {
     operator = "above"

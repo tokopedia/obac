@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  alert_channel_name = "911-executive-alert"
+  alert_channel_name = "channel executive"
 
   alert_channel_slack_channel_id = "ABCDEXYZ"
   alert_channel_slack_bypass_warn = false

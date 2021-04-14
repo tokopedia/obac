@@ -17,7 +17,7 @@ inputs = {
     dependency.policy.outputs.id,
   ]
   nrql_alert_condition_enabled = true
-  nrql_alert_condition_query = "SELECT rate(count(*), 1 seconds) AS RPS FROM promo_validate_stacking_attempt WHERE env = 'production' and type = 'api'"
+  nrql_alert_condition_query = "SELECT rate(count(*), 1 seconds) AS RPS FROM metric-name WHERE env = 'production' and type = 'api'"
 
   nrql_alert_condition_critical = {
     operator = "below"

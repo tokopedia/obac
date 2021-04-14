@@ -7,8 +7,8 @@ terraform {
 }
 
 /*
-dependency "slack-911-executive-alert" {
-  config_path = "../../channels/slack/911-executive-alert"
+dependency "slack-channel-executive" {
+  config_path = "../../channels/slack/channel-executive"
 }
 */
 
@@ -20,7 +20,7 @@ inputs = {
     "example_email",
   ]
   alert_policy_channel_ids = [
-    dependency.slack-911-executive-alert.outputs.id,
+    dependency.slack-channel-executive.outputs.id,
   ]
   */
 }

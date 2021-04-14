@@ -7,12 +7,12 @@ terraform {
 }
 
 /*
-dependency "slack-911-executive-alert" {
-  config_path = "../../channels/slack/911-executive-alert"
+dependency "slack-executive-alert" {
+  config_path = "../../channels/slack/channel-executive"
 }
 
-dependency "slack-911-emergency" {
-  config_path = "../../channels/slack/911-emergency"
+dependency "slack-emergency" {
+  config_path = "../../channels/slack/channel-emergency"
 }
 */
 
@@ -24,8 +24,8 @@ inputs = {
     "example_email",
   ]
   alert_policy_channel_ids = [
-    dependency.slack-911-emergency.outputs.id,
-    // dependency.slack-911-executive-alert.outputs.id,
+    dependency.slack-emergency.outputs.id,
+    // dependency.slack-executive-alert.outputs.id,
   ]
   */
 }

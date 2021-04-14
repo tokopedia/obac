@@ -22,7 +22,7 @@ inputs = {
     dependency.policy2.outputs.id,
   ]
   nrql_alert_condition_enabled = true
-  nrql_alert_condition_query = "SELECT percentage(count(*), where boolean(is_success) IS true) as SuccessRate from grpc_suggestion_engine_get_promo_logistic_attempt"
+  nrql_alert_condition_query = "SELECT percentage(count(*), where boolean(is_success) IS true) as SuccessRate from somemetric"
 
   nrql_alert_condition_critical = {
     operator = "below"
