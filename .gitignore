@@ -1,0 +1,6 @@
+generator/vendor
+.idea
+.terragrunt-cache
+env/
+dashboards/**/terragrunt.hcl
+datadog/tools/generator/dashboard/vendor
