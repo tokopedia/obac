@@ -1,0 +1,5 @@
+remote_state_s3_backend_key_prefix = "states"
+remote_state_s3_backend_profile    = "your-s3-profile"
+remote_state_s3_backend_endpoint  = "https://s3-ap-southeast-1.amazonaws.com"
+remote_state_s3_backend_region    = "ap-southeast-1"
+function_name                     = "developer"
