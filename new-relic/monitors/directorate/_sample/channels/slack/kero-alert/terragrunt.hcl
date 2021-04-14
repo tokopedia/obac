@@ -3,12 +3,10 @@ include {
 }
 
 terraform {
-  source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//alert-channel//threaded-slack"
+  source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//alert-channel//slack"
 }
 
 inputs = {
   alert_channel_name = "Team Alert"
-
-  alert_channel_slack_channel_id = "ABCDEXYZ"
-  alert_channel_slack_bypass_warn = false
+  alert_slack_webhook_url = "https://someslackurl.com"
 }
