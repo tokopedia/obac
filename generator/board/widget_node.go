@@ -179,7 +179,7 @@ func (w *Widget) SetArrow(startX, startY int, section Section, group Group, s in
 	// don't set arrow if last of node in section
 	if s < len(group.Sections)-1 {
 		arrowImg := document.Widget{
-			Name:      "->",
+			Name:      " ",
 			X:         newStartX,
 			Y:         startY,
 			Width:     w.ArrowWidth,

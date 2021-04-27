@@ -7,6 +7,6 @@ terraform {
 }
 
 inputs = {
-  alert_channel_name = "Team Alert"
+  alert_channel_name = "Demo Obac"
   alert_slack_webhook_url = "https://someslackurl.com"
 }

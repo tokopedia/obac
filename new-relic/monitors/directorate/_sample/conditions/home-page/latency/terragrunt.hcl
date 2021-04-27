@@ -11,13 +11,13 @@ dependency "policy" {
 }
 
 inputs = {
-  nrql_alert_condition_name = "Sample Condition Latency testing obac"
+  nrql_alert_condition_name = "Sample Condition Latency testing obac demo"
   nrql_alert_condition_description = "Sample Condition Description"
   nrql_alert_condition_policy_ids = [
     dependency.policy.outputs.id,
   ]
   nrql_alert_condition_enabled = true
-  nrql_alert_condition_query = "SELECT percentile(timer, 95) AS Latency FROM metricname WHERE type='api'"
+  nrql_alert_condition_query = "SELECT percentile(timer, 95) AS Latency FROM promo_function_stacking_validate_time WHERE type='api'"
 
   nrql_alert_condition_critical = {
     operator = "above"
