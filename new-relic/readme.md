@@ -21,6 +21,7 @@ dashboards
 ```
 
 for dashboard layout adopt column base layout so every box is under directorate name
+
 ![alt text](img/dashboard.png)
 
 in a box there is 3 indicator 
@@ -146,8 +147,10 @@ usually use object storage like s3 and etc.
 2. To Fill data related RPS, Latency and SuccessRate that already define above 
    `monitors/directorate/_sample/conditions/home-page` create directory conditions under your directorate
    and set name `home-page` like your funnel need
+   
    ![alt text](img/condition-folder.png) 
-   there is 3 folder
+   
+    there is 3 folder
    - latency
    - rps
    - success-rate
@@ -207,7 +210,9 @@ usually use object storage like s3 and etc.
     }
    ```
 4. Fill the policy if you need send alert to your channel
+   
    ![alt text](img/policy.png) 
+   
    sample policy: 
 
    ```
@@ -237,7 +242,9 @@ usually use object storage like s3 and etc.
    ```
    
 5. Define your channel for receive alert
+   
     ![alt text](img/channel.png)
+   
    sample of channel :
    ``` 
    include {
