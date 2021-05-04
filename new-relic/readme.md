@@ -114,3 +114,166 @@ before running this make sure all environment above is filled and also don't for
 usually use object storage like s3 and etc.
 
 
+## Step By Step Creating your dashboard
+
+1. Define the layout at `new-relic/dashboards/company_name/your-journey/board.hcl`
+   define layout that you want
+   ```
+   name = "Example Exec Dashboard Testing"
+
+    row {
+      group "Company Name" {
+        section "Directorate Name A" {
+          column {
+            node {
+              type = "red_module"
+              name = "Sample"
+              monitor = "monitors/directorate/_sample/conditions/home-page"
+            }
+    
+            node {
+              type = "red_module"
+              name = "Sample Upstream"
+              monitor = "monitors/directorate/_sample/conditions/product-page"
+            }
+          } // end column
+        } // end section
+      } // end group
+    } // end row   
+   
+   ```
+  
+2. To Fill data related RPS, Latency and SuccessRate that already define above 
+   `monitors/directorate/_sample/conditions/home-page` create directory conditions under your directorate
+   and set name `home-page` like your funnel need
+   ![alt text](img/condition-folder.png) 
+   there is 3 folder
+   - latency
+   - rps
+   - success-rate
+
+3. Fill the query related rps, latency, success-rate inside their folder with filename terragrunt.hcl
+  sample of terragrunt.hcl
+   ``` 
+    include {
+      path = find_in_parent_folders()
+    }
+    
+    terraform {
+      source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//nrql-alert-condition"
+    }
+    
+   // this part for set policy alerting in a conditions, the policy will have chanels or multiple channels
+    dependency "policy" {
+      config_path = "../../../policies/sample-policy"
+    }
+    
+   // we can have multiple policy in one condition
+    dependency "policy2" {
+      config_path = "../../../policies/another-policy"
+    }
+    
+    inputs = {
+      // the name of condition
+      nrql_alert_condition_name = "User Profiles Latency"
+      // the description of condition , you can also mention team name at here for example @team-name
+      nrql_alert_condition_description = "User Profiles Latency"
+      // fill the policy id output in conditions
+      nrql_alert_condition_policy_ids = [
+         dependency.policy.outputs.id,
+      ]
+      nrql_alert_condition_enabled = true
+      // set the query don't forget with alias Latency, RPS, SuccessRate
+      nrql_alert_condition_query = "SELECT percentile(duration, 95) * 1000 as 'Latency' FROM Transaction where request.uri='/api/v1/users/profile' since 15 minutes ago"
+    
+      // set the alert condition critical
+      nrql_alert_condition_critical = {
+        // the value of operator can be below, above
+        operator = "below"
+        // thershold value
+        threshold = 95
+        // thershold duration in second unit
+        threshold_duration = 300
+        threshold_occurrences = "ALL"
+      }
+    
+      // set the alert condition warning
+      nrql_alert_condition_warning = {
+        operator = "below"
+        threshold = 99
+        threshold_duration = 600
+        threshold_occurrences = "ALL"
+      }
+    }
+   ```
+4. Fill the policy if you need send alert to your channel
+   ![alt text](img/policy.png) 
+   sample policy: 
+
+   ```
+   include {
+      path = find_in_parent_folders()
+    }
+    
+    terraform {
+      source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//alert-policy"
+    }
+    
+    // definde the channel , like slack , pager duty or etc
+    dependency "slack-channel-team-name" {
+      config_path = "../../channels/slack/channel-executive"
+    }
+    
+    
+    inputs = {
+      alert_policy_name = "Testing Policy #1"
+    
+      // set the policy channel ids base on your output 
+      alert_policy_channel_ids = [
+        dependency.slack-channel-team-name.outputs.id,
+      ]
+      
+    } 
+   ```
+   
+5. Define your channel for receive alert
+    ![alt text](img/channel.png)
+   sample of channel :
+   ``` 
+   include {
+      path = find_in_parent_folders()
+    }
+    
+    terraform {
+      source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//alert-channel//slack"
+    }
+    
+    inputs = {
+   // define the name
+      alert_channel_name = "Team Alert"
+   // set the webhook url
+      alert_slack_webhook_url = "https://someslackurl.com"
+    }
+
+   ```
+6. Run your terragrunt for creating channel  go to your channel directory
+ run `terragrunt plan` if ok then run `terragrunt apply`
+   
+7. Run your terragrunt for creating policy  go to your policy directory
+ run `terragrunt plan` if ok then run `terragrunt apply`
+   
+8. Run your dashboard creation
+    - `export NEW_RELIC_ACCOUNT_ID=xxxx`
+    - `export NEW_RELIC_API_KEY=XXX_XXXXX`
+    - `export OPEN_BOARD_PACKAGE_ID=XXX_XXX_XXX`
+    
+    get your package id in your url open board for example
+    `https://one.newrelic.com/launcher/your-package-id`
+
+    ```shell 
+    go run ./generator/main.go -src=./new-relic/dashboards/company_name/journey/board.hcl -docID=testing
+    ```
+9. See the result at your newrelic open board
+
+
+    
