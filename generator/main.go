@@ -51,7 +51,7 @@ func generateExisting(srcName string) []document.Widget {
 
 	// init configuration of widget
 	nodeWidget := board.Widget{
-		NodeWidth:     5,
+		NodeWidth:     2,
 		NodeHeight:    7,
 		ArrowHeight:   1,
 		ArrowWidth:    1,

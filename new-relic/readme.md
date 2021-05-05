@@ -106,6 +106,12 @@ for creating executive dashboard specify the board (layout) setting file `src` a
 go run ./generator/main.go -src=./new-relic/dashboards/company_name/journey/board.hcl -docID=testing
 ```
 
+or you can execute the executable binary
+
+```shell 
+./generator/generator -src=./new-relic/dashboards/company_name/journey/board.hcl -docID=testing
+```
+
 for run `channel`, `conditions`, `dependency`, `drop-rules` and `policies` just run
 ```shell
 terragrunt apply

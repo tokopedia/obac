@@ -41,18 +41,20 @@ func GenMutationGQL(doc document.NerdStorageWriteDocument) (document.NRQLNerdSto
 
 	htmlWidget := make([]document.NRQLHTMLWidget, 0)
 
+	//#41c464 = green
+	//#ffbf00 = yellow
+	//#eb364b = red
 	htmlWidget = append(htmlWidget, document.NRQLHTMLWidget{
 		Name: "node",
 		Value: `
 <div style="text-align:center">
-		<div style="border:1px solid white;height:140px;color:white;display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:larger;background-color:${((Q1:SuccessRate)*100) < 99?'orange':'green'}">
+		<div style="border:1px solid white;height:140px;color:white;display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:larger;background-color:${((Q1:SuccessRate)*100) < 99.5 ? ( ((Q1:SuccessRate)*100) < 99 ? '#eb364b' : '#ffbf00') :'#41c464'}">
 <label style="font-size: 45px;">${((Q1:SuccessRate)*100).toFixed(2)}</label> <p> %</p>
 </div>
 		<div style="column-count:2;text-align:center;column-gap:1px">
-		<div style="border:1px solid white;height:60px;color:white;display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:larger;background-color:${Q2:RPS < 0 ?'orange':'green'}">
+		<div style="border:1px solid white;height:60px;color:white;display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:larger;background-color:${Q2:RPS < 2 ? (Q2:RPS <= 1  ? '#eb364b' : '#ffbf00') :'#41c464'}">
 <label style="font-size: 15px;">${(Q2:RPS).toFixed(2)}</label>  <p> RPS</p></div>
-
-		<div style="border:1px solid white;height:60px;color:white;display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:larger;background-color:${Q3:Latency > 100 ?'orange':'green'}">
+		<div style="border:1px solid white;height:60px;color:white;display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:larger;background-color:${Q3:Latency > 100 ? (Q3:Latency > 200 ? '#eb364b' : '#ffbf00') :'#41c464'}">
 <label style="font-size: 15px;">${(Q3:Latency).toFixed(2)}</label> <p> ms</p></div>
 </div></div><div>
 <div>
@@ -67,6 +69,13 @@ func GenMutationGQL(doc document.NerdStorageWriteDocument) (document.NRQLNerdSto
 	htmlWidget = append(htmlWidget, document.NRQLHTMLWidget{
 		Name:  "group",
 		Value: `<div class="group" style="font-size:50px !important;"></div>`,
+	})
+
+	htmlWidget = append(htmlWidget, document.NRQLHTMLWidget{
+		Name: "arrow",
+		Value: `<div class="group" style="font-size:50px !important;">
+			<img src="https://img.icons8.com/carbon-copy/100/000000/arrow.png"/>
+		</div>`,
 	})
 
 	v.HTMLWidget = htmlWidget
