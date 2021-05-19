@@ -1,5 +1,5 @@
 terraform {
-  backend "s3" {}
+  backend "local" {}
 }
 
 variable "alert_channel_name" {

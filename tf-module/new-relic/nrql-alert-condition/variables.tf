@@ -1,5 +1,5 @@
 terraform {
-  backend "s3" {}
+  backend "local" {}
 }
 
 variable "nrql_alert_condition_name" {
