@@ -1,13 +1,13 @@
 remote_state {
-  backend = "s3"
+  backend = "local"
   config  = {
-    bucket         = "replace with your bucket"
-    key            = "replace your key"
-    endpoint       = "https://s3-ap-southeast-1.amazonaws.com"
-    region         = "ap-southeast-1"
-    encrypt        = true
-    dynamodb_table = "replace with your dynamo table for lock"
-    profile         = "replace with your profile"
+//    bucket         = "replace with your bucket"
+//    key            = "replace your key"
+//    endpoint       = "https://s3-ap-southeast-1.amazonaws.com"
+//    region         = "ap-southeast-1"
+//    encrypt        = true
+//    dynamodb_table = "replace with your dynamo table for lock"
+//    profile         = "replace with your profile"
   }
 }
 
