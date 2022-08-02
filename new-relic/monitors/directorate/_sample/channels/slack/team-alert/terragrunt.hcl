@@ -3,7 +3,7 @@ include {
 }
 
 terraform {
-  source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//alert-channel//slack"
+  source = "git::git@github.com:tokopedia/obac.git//tf-module//new-relic//alert-channel//slack?ref=f_zainul_sample_local_state"
 }
 
 inputs = {
